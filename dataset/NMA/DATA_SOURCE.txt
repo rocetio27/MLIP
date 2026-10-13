@@ -1,0 +1,21 @@
+NMA dataset provenance
+
+The N-methylacetamide (NMA) data originate from the FIREANN study:
+
+Zhang, Yaolong; Jiang, Bin. Universal machine learning for the response of
+atomistic systems to external fields. Nature Communications 14, 6424 (2023).
+DOI: 10.1038/s41467-023-42148-y
+https://doi.org/10.1038/s41467-023-42148-y
+
+Authors' NMA dataset repository (train, validation, and test directories):
+https://github.com/zhangylch/FIREANN/tree/main/data/NMA
+
+These .pt files are the project-format copies used by our NMA implementation:
+  dataset_nma_train.pt
+  dataset_nma_validation.pt
+  dataset_nma_test.pt
+
+The .pt files are not claimed to be the authors' original distribution format.
+Please cite the publication above when using the NMA data.
+For the upstream repository's terms and notices, see:
+https://github.com/zhangylch/FIREANN/blob/main/LICENSE

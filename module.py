@@ -1,4 +1,5 @@
 from e3nn import o3
+from pathlib import Path
 from utils import parity2chr
 import torch
 
@@ -41,6 +42,8 @@ norm_eps    = 1e-8                      # 1/sqrt(N_i + eps) message normalisatio
 Y_irreps       = o3.Irreps(" + ".join([f"1x{l}{'e' if l % 2 == 0 else 'o'}" for l in range(lf_max + 1)]))
 allowed_irreps = [o3.Irrep(l, p) for l in range(l_max + 1) for p in (-1, 1)]
 
-dataset_key1 = "dataset_ionic33_dimer_contact_filtered.pt"
-dataset_key2 = "dataset_ionic33_monomer.pt"
+# Resolve packaged data independently of the shell's working directory.
+DATASET_DIR = Path(__file__).resolve().parent / "dataset" / "Organic ion-pair dimer"
+dataset_key1 = str(DATASET_DIR / "dataset_ionic33_train_dimer.pt")
+dataset_key2 = str(DATASET_DIR / "dataset_ionic33_train_monomer.pt")
 model_type = "DDeq"  # Qeq, CDeq, DDeq (paper: DDeq = charge-dipole equilibration, Eq. (3))
