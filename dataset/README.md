@@ -50,9 +50,11 @@ The renamed training files contain the same data as the previously named
 - `test_reference_isolated_atoms/`: isolated-atom reference data, not part of
   the merged training dataset.
 
-The zero-field 5.5-7.2 Angstrom interval was also evaluated by the original
-NaCl validation loader. The merged test file denotes non-training evaluation
-data, not necessarily an untouched final holdout.
+The zero-field 5.5-7.2 Angstrom interval was evaluated during training for
+monitoring only; its metrics were not used for parameter updates or checkpoint
+selection. Checkpoint selection used only errors on the zero-field training
+configurations at 1.8-5.4 Angstrom, logged as "In-range Validation". Despite that
+log label, these are the training configurations, not a separate validation set.
 
 ## NMA
 
