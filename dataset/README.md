@@ -5,6 +5,32 @@ configured in `module.py`. Dataset paths are resolved relative to that module,
 not the working directory. Other systems' datasets are included for reference;
 the top-level training configuration is not automatically switched between systems.
 
+## Units and sign conventions
+
+The core model tensors use Hartree atomic units: positions in Bohr, energies in Hartree,
+forces in Hartree/Bohr, dipole moments in e·Bohr, polarizabilities in Bohr³
+and the external electric field `E_vec` in atomic units (1 a.u. = 51.422 V/Å).
+
+Every dataset follows the physical convention used by the code
+(`utils.cal_baseline_energy`, `train_helper.compute_batch_predictions`):
+
+    μ = −∂E/∂ε,   α = −∂²E/∂ε²
+
+The linear induced-dipole response is δμ = α δε. Auxiliary metadata such as
+`external_field_v_per_ang` and `d_center_ang` retain the units indicated by their names.
+
+This is **not** the raw convention of the quantum-chemistry inputs: Psi4's
+`perturb_dipole` field and FIREANN's `External_field` are the negative of the
+physical field, and FIREANN's `POL` is `∂²E/∂F²`, i.e. the negative of the
+physical polarizability. The NaCl and ion-pair files were written in the
+physical convention when they were generated (`E_vec = −E_psi4`). The water and
+NMA files were converted afterwards with `flip_field_sign.py` (repository root),
+which negated `E_vec` and `field` in the water files and `E_vec`,
+`polarizability` and `external_field_v_per_ang` in the NMA files; each converted
+archive carries a `physical_sign_convention` marker record and the script skips
+files that already have it. These files are already converted; do not apply an
+additional sign reversal when loading them.
+
 ## Organic ion-pair dimer
 
 - `dataset_ionic33_train_dimer.pt`: training dimers; the code selects d <= 7.1 Angstrom.
@@ -30,15 +56,24 @@ data, not necessarily an untouched final holdout.
 
 ## NMA
 
-Train, validation, and test data in project-specific PyTorch format.
+Train, validation, and test data (10,512 / 1,289 / 1,007 configurations, the
+split distributed with FIREANN) in project-specific PyTorch format.
 See [DATA_SOURCE.txt](NMA/DATA_SOURCE.txt) for the FIREANN publication and
-the authors' original dataset repository.
+the authors' original dataset repository. Energies, forces, molecular dipoles
+and polarizabilities are FIREANN's labels converted to atomic units; `E_vec`,
+`polarizability` and `external_field_v_per_ang` have been converted to the
+physical sign convention described above. The NMA files carry **no MBIS
+labels**: `charges` and `dipoles` are zero placeholders, and the NMA training
+configuration uses `w_q = 0` (no charge-supervision loss).
 
 ## Water molecule
 
-Zero-field single-point, rotation, and electric-field-sweep datasets.
+The water datasets were generated in this work using DFT calculations performed with Psi4.
 
-Dataset binaries are copied unchanged from the local project archive.
-They contain PyTorch Geometric objects and can be read with
+Zero-field single-point, rotation, and electric-field-sweep datasets. The
+rotation and field-sweep files are evaluation data only; `E_vec` and the scalar
+`field` key (z-component of `E_vec`) are in the physical convention.
+
+The dataset files contain PyTorch Geometric objects and can be read with
 `torch.load(path, weights_only=False, map_location="cpu")` in an environment
 with PyTorch and PyTorch Geometric. Only load pickle-based files from trusted sources.
