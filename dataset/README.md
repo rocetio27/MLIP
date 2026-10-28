@@ -37,7 +37,13 @@ additional sign reversal when loading them.
 - `dataset_ionic33_train_monomer.pt`: isolated training monomers.
 - `dataset_test_group_001.pt`, `dataset_test_group_002.pt`,
   `dataset_test_group_003.pt`: three test groups.
-- `dataset_ionic33_4_test_reference_monomer.pt`: test monomer references.
+- `dataset_ionic33_test_reference_monomer.pt`: six isolated-monomer references
+  (A and B for each of the three reported test geometries).
+
+The test monomer references correspond only to groups 001-003:
+`SSI__033ASP-279LYS-1`, `SSI__103GLU-106LYS-1`, and `SSI__221GLU-230LYS-1`,
+respectively. References for the unused candidate `SSI__002LYS-035GLU-1`
+(group 000) are excluded. Original record identifiers are retained.
 
 The renamed training files contain the same data as the previously named
 `dataset_ionic33_dimer_contact_filtered.pt` and `dataset_ionic33_monomer.pt`.
