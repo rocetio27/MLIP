@@ -16,12 +16,8 @@ The NMA datasets are provided in project-specific PyTorch format:
   dataset_nma_test.pt
 
 The .pt files are not claimed to be the authors' original distribution format.
-Sign convention: FIREANN's External_field is the negative of the physical field and
-its POL is d2E/dF2 (the negative of the physical polarizability). In these .pt files
-E_vec, polarizability and external_field_v_per_ang have been negated so that they
-follow the physical convention used by this code (see ../README.md).
-These datasets were used in this project and are provided here with the
-sign-convention conversions described above.
+These datasets were used in this project. Units and field definitions are
+provided in ../README.md.
 Please cite the publication above when using the NMA data.
 For the upstream repository's terms and notices, see:
 https://github.com/zhangylch/FIREANN/blob/main/LICENSE
