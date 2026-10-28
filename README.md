@@ -33,7 +33,3 @@ backend), torch-scatter, e3nn, NumPy, scikit-learn, and tqdm.
 ## Data
 
 See [dataset/README.md](dataset/README.md) for the four dataset collections.
-The NMA data originate from the FIREANN study; the citation and original data
-link are in [dataset/NMA/DATA_SOURCE.txt](dataset/NMA/DATA_SOURCE.txt).
-The supplied training configuration is for the organic ion-pair system;
-the other datasets require their system-specific training configurations.
