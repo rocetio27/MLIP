@@ -42,7 +42,4 @@ the authors' original dataset repository.
 
 ## Water molecule
 
-The water datasets were generated in this work using DFT calculations performed with Psi4.
-
-Zero-field single-point, rotation, and electric-field-sweep datasets. The
-rotation and field-sweep files are evaluation data only.
+Zero-field single-point, rotation, and electric-field-sweep datasets.
