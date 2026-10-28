@@ -42,8 +42,7 @@ additional sign reversal when loading them.
 
 The test monomer references correspond only to groups 001-003:
 `SSI__033ASP-279LYS-1`, `SSI__103GLU-106LYS-1`, and `SSI__221GLU-230LYS-1`,
-respectively. References for the unused candidate `SSI__002LYS-035GLU-1`
-(group 000) are excluded. Original record identifiers are retained.
+respectively. Original record identifiers are retained.
 
 The renamed training files contain the same data as the previously named
 `dataset_ionic33_dimer_contact_filtered.pt` and `dataset_ionic33_monomer.pt`.
