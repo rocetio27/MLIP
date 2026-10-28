@@ -1,7 +1,6 @@
 # MLIP
 
-Model implementation and training code for an electrostatic-baseline-assisted
-equivariant message-passing neural network.
+Model implementation and training code for our manuscript "Extrapolating Field Response and Long-Range Interactions with Machine Learning Interatomic Potentials"
 
 ## Training
 
