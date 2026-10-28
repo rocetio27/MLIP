@@ -58,6 +58,14 @@ class NodeEmbedding_CD(nn.Module):
         self.irreps_1o_in = o3.Irreps("1x1o")
         self.irreps_1o_out = o3.Irreps(f"{N_r}x1o")
         self.efield_lin = o3.Linear(self.irreps_1o_in, self.irreps_1o_out, internal_weights=True, shared_weights=True, biases=False)
+
+        # Retained for compatibility with the original initialization and checkpoints.
+        # This layer is not used in the forward pass.
+        self.muq_lin = o3.Linear(
+            self.irreps_1o_in, self.irreps_1o_out,
+            internal_weights=True, shared_weights=True, biases=False,
+        )
+        
         self.dipole_lin = o3.Linear(self.irreps_1o_in, self.irreps_1o_out, internal_weights=True, shared_weights=True, biases=False)
 
         self.irreps_in = o3.Irreps(f"{6 * N_r}x0e + {2 * N_r}x1o")
